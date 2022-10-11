@@ -69,13 +69,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Get Version
-      #   id: get_version
-      #   run: |
-      #     version=$(grep 'CLOUDFLARED_VERSION=' Dockerfile | cut -d "=" -f 2)
-      #     echo "Current image version is $image_version"
-      #     echo "::set-output name=image_version::$version"
-                  # ghcr.io/docker-collection/${{ env.workflow_image }}:${{ steps.get_version.outputs.image_version }}
+      - name: Get Version
+        id: get_version
+        run: |
+          version=$(grep 'oci-cli==' requirements.txt | cut -d "=" -f 3)
+          echo "Current image version is $image_version"
+          echo "::set-output name=image_version::$version"
 
       - name: Build & Push
         uses: docker/build-push-action@c84f38281176d4c9cdb1626ffafcd6b3911b5d94 # tag=v3.1.1
@@ -85,7 +84,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/docker-collection/${{ env.workflow_image }}:latest
-
+            ghcr.io/docker-collection/${{ env.workflow_image }}:${{ steps.get_version.outputs.image_version }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
