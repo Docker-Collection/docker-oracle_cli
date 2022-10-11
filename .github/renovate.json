@@ -4,5 +4,7 @@
     "config:base",
     "helpers:pinGitHubActionDigests",
     "docker:pinDigests"
-  ]
+  ],
+  "rebaseWhen": "conflicted",
+  "automerge": true
 }
