@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster@sha256:de7ade35986baafd658c9b1a952128841b6ae64a06c3c7e065c1d9ea5f5f4fc4 as Builder
+FROM python:3.10-slim-buster@sha256:9727fe7eede2069dc15287e17eadd709a43094a4062a8cbd74d4504a8270d1f8 as Builder
 
 COPY requirements.txt .
 
@@ -9,7 +9,7 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir --user -r requirements.txt
 
-FROM python:3.10-slim-buster@sha256:de7ade35986baafd658c9b1a952128841b6ae64a06c3c7e065c1d9ea5f5f4fc4
+FROM python:3.10-slim-buster@sha256:9727fe7eede2069dc15287e17eadd709a43094a4062a8cbd74d4504a8270d1f8
 
 COPY --from=Builder /root/.local /root/.local
 
