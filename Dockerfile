@@ -2,7 +2,8 @@ FROM python:3.10.8-alpine as Builder
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir --user -r requirements.txt
+RUN apk add --update alpine-sdk build-base gcc musl-dev libffi-dev openssl-dev cargo && \
+    pip install --no-cache-dir --user -r requirements.txt
 
 FROM python:3.10.8-alpine
 
