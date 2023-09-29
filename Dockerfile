@@ -1,11 +1,11 @@
-FROM python:3.11.4-alpine@sha256:bd16cc548687f25bf7cbc29c3d284c290cf63899b281f0f3a52fc697b48884c7 as Builder
+FROM python:3.11.5-alpine@sha256:cd311c6a0164f34a7edbf364e05258b07d66d3f7bc155139dcb9bef88a186ded as Builder
 
 COPY requirements.txt .
 
 RUN apk add --update alpine-sdk build-base gcc musl-dev libffi-dev openssl-dev cargo && \
     pip install --no-cache-dir --user -r requirements.txt
 
-FROM python:3.11.4-alpine@sha256:bd16cc548687f25bf7cbc29c3d284c290cf63899b281f0f3a52fc697b48884c7
+FROM python:3.11.5-alpine@sha256:cd311c6a0164f34a7edbf364e05258b07d66d3f7bc155139dcb9bef88a186ded
 
 COPY --from=Builder /root/.local /root/.local
 
